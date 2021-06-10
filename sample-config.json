@@ -1,0 +1,11 @@
+{
+    "de_spam1": {
+        "dataset_name": "german-spam",
+        "input_path": ["~/spam/german-spam/german-spam.txt"],
+        "data_loader": "germeval",
+        "augmentations": ["perturbations", "synonyms"], 
+        "sample_source": "twint",
+        "output_path": "~/spam/augmentations",
+        "language_code": "de"
+    }
+}
