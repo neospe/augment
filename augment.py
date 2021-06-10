@@ -445,6 +445,8 @@ def augment_debiasing(data, config, uid):
     words_neg = []  
 
     for entry in data:
+        # comment out if not using the ```dataload``` package
+        # alternatively, just do: if label == 'class 1', else..
         if MAPPING_MULTICLASS[entry['label']] > 0:   # positive class
             for word in re.split(';|,|\'| |\.|-', entry['text']):
                 word = clean_str(word).lower()
@@ -653,9 +655,9 @@ if __name__ == '__main__':
             
         # load data
         print('\n %s' % (config['dataset_name']))
-        # 1. comment out if not using the ```dataload``` package
+        # comment out if not using the ```dataload``` package
+        # alternatively, load your data as a list of dicts with keys 'text', 'label', and optionally 'id'
         data = getattr(data_loader, config['data_loader'])(files=config['input_path'], local=True)  # call data loader function by its name
-        # 2. load your data as a list of dicts with keys 'text', 'label', and optionally 'id'
         print(len(data), 'items')
 
         # perform augmentation tasks

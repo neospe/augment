@@ -44,25 +44,22 @@ This project is from 2020 and there are a few things to be noted.
     - the backlog is checked to see if a specific config has already been executed
 
 - Configuration file format
-  - *dataset_name*
+  - *dataset_name* (string)
   - *input_path* (list): path(s) to input file(s)
-  - *data_loader*: name of loader function in ```dataload```
+  - *data_loader* (string): name of loader function in ```dataload```
   - *augmentations* (list): ```perturbations```, ```synonyms```, ```debiasing```
-  - *sample_source*: ```twitter```, ```twint```, ```miowordcorpus```
-  - *output_path*: path to output directory
-  - *language_code*: ```de```, ```en```
+  - *sample_source* (string): ```twitter```, ```twint```, ```miowordcorpus```
+  - *output_path* (string): path to output directory
+  - *language_code* (string): ```de```, ```en```
 
 - Output
     - Data: txt file(s) in TSV format
-    - Metadata: config + samples backlog in json files
+    - Metadata: config + samples backlog in JSON files
 
 ## good to know
 
 - Regenerate existing augmentations
-  1. manual deletion of:
-    - relevant entries in _backlog.json_
-    - corresponding txt files
-    - entries in debiasing-samples-backlog.json
+  1. manual deletion of: relevant entries in _backlog.json_, corresponding txt files, and entries in _debiasing-samples-backlog.json_
   2. restart augment.py with the same config
 
 - A new language requires
