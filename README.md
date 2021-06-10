@@ -1,7 +1,9 @@
 
 # augment
 
-Classical text data augmentation using dictionaries, wordnets, and classifiers. Can be used to automate class imbalance correction by sampling from various sources and performing various word replacement strategies. It's a modular system implemented for English and German, and easily expandable.
+Classical text data augmentation.
+
+Provides automatic debiasing and class imbalance correction by sampling from various sources and performing various word replacement strategies. A modular tool currently implemented for English and German, and easily expandable.
 
 ## features
 
@@ -12,8 +14,8 @@ Classical text data augmentation using dictionaries, wordnets, and classifiers. 
 - **Data Generation via Sampling**
   - Sources: Twitter, Twint, MioWordCorpus
   - Debiasing Sampling: Find samples that balance features (words/concepts) that occur frequently in the positive class but are not related to the classification task. For example:
-    - 1. Search for neutral terms that are overrepresented in the positive class
-    - 2. Search for examples of those terms that are neutral/negative class
+    1. Search for neutral terms that are overrepresented in the positive class
+    2. Search for examples of those terms that are neutral/negative class
 
 - **Backlogs: Rule Out Duplicate Samples/Augmentations**
   - Main backlog: Records job configs, doesn’t re-run the same config
@@ -56,19 +58,19 @@ This project is from 2020 and there are a few things to be noted.
 
 ## good to know
 
-- regenerate existing augmentations
-  - 1. manual deletion of:
+- Regenerate existing augmentations
+  1. manual deletion of:
     - relevant entries in _backlog.json_
     - corresponding txt files
     - entries in debiasing-samples-backlog.json
-  - 2. restart augment.py with the same config
+  2. restart augment.py with the same config
 
-- a new language requires
+- A new language requires
     - word lists: keywords, stop words
     - wordnet: multiwordnet, babelnet, or similar
     - (optional) a classification model for your task
 
-- sampling with twint produces some duplicates
+- Sampling with twint produces some duplicates
     - some output files are therefore empty
     - possible solutions
         - sample more frequently at different times
