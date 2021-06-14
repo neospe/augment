@@ -7,17 +7,17 @@ Provides automatic debiasing and class imbalance correction by sampling from var
 
 ## features
 
-- **Data Generation via Replacement**
+- **Data generation via replacement**
   - Strategies: Perturbation, Semantic Relations
   - Sources: WordNet, GermaNet, Word Lists
 
-- **Data Generation via Sampling**
+- **Data generation via sampling**
   - Sources: Twitter, Twint, MioWordCorpus
-  - Debiasing Sampling: Find samples that balance features (words/concepts) that occur frequently in the positive class but are not related to the classification task. For example:
-    1. Search for neutral terms that are overrepresented in the positive class
-    2. Search for examples of those terms that are neutral/negative class
+  - Debiasing Sampling: find samples that balance features (words/concepts) that occur frequently in the positive class but are not related to the classification task. For example:
+    1. search for neutral terms that are overrepresented in the positive class
+    2. search for examples of those terms that are neutral/negative class
 
-- **Backlogs: Rule Out Duplicate Samples/Augmentations**
+- **Backlogs: rule out duplicate samples/augmentations**
   - Main backlog: Records job configs, doesn’t re-run the same config
   - Samples backlog: Records sample IDs, doesn’t include a sample if it has already been processed before
 
