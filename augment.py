@@ -18,8 +18,6 @@ from collections import Counter
 import editdistance
 from nltk.corpus import wordnet, stopwords
 from germanet import load_germanet
-from dataload.loader import *
-from dataload.preproc import *
 
 
 # PARAMETERS
