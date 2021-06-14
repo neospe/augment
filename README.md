@@ -27,13 +27,12 @@ This project is from 2020 and there are a few things to be noted.
 
 - Twitter API and the Twint package are not operational anymore
 - GermaNet: needs a license, is served locally using MongoDB, and accessed using a client predating the official one.
-- Our custom ```dataload``` library is used to load data. This will need to be replaced with your own loader.
 
 ## install
 
-- Dependencies: ```pip install twint tweepy langid sqlite3 requests tqdm editdistance nltk git+https://github.com/hexis-systems/dataload.git git+https://github.com/hexis-systems/pygermanet.git```
+- Dependencies: ```pip install twint tweepy langid sqlite3 requests tqdm editdistance nltk git+https://git.sr.ht/~spe/pygermanet```
 - WordNet: ```python -m nltk.downloader wordnet```
-- GermaNet: ```python -m pygermanet.mongo_import ~/GN_V80/GN_V80_XML/```
+- GermaNet: install MongoDB, then ```python -m pygermanet.mongo_import ~/GN_V80/GN_V80_XML/```
 
 ## run
 
@@ -46,7 +45,6 @@ This project is from 2020 and there are a few things to be noted.
 - Configuration file format
   - *dataset_name* (string)
   - *input_path* (list): path(s) to input file(s)
-  - *data_loader* (string): name of loader function in ```dataload```
   - *augmentations* (list): ```perturbations```, ```synonyms```, ```debiasing```
   - *sample_source* (string): ```twitter```, ```twint```, ```miowordcorpus```
   - *output_path* (string): path to output directory
@@ -57,6 +55,8 @@ This project is from 2020 and there are a few things to be noted.
     - Metadata: config + samples backlog in JSON files
 
 ## good to know
+
+- Branch ```dataload``` integrates with a complete MLOps infrastructure: a data loader for various text classification data sets (```dataload```), optionally backed by GridFS (```datalake```), and feeding into an automated training and evaluation pipeline (```autofit```).
 
 - Regenerate existing augmentations
   1. manual deletion of: relevant entries in _backlog.json_, corresponding txt files, and entries in _debiasing-samples-backlog.json_

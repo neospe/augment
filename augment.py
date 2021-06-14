@@ -61,6 +61,25 @@ API_INTERVAL = None  # optional: float
 CLF_THRESHOLD = None  # optional: float
 
 
+def simple_tsv_reader(path):
+    f = open(path,'r', encoding='utf-8')
+    data = []
+    for line in f:
+        entry = {}
+        cols = line.split('\t')
+        entry['text'] = cols[0]
+        entry['label'] = cols[1].rstrip()
+        data.append(entry)
+
+
+def wordlist(path):
+    wordlist = []
+    with open(path,'r', encoding='utf-8') as f:
+        for line in f:
+            wordlist.append(line.rstrip())
+    return list(set(wordlist))
+
+
 def save_output(data_aug, outfile):
     print('* writing', len(data_aug), 'entries to', outfile)
     with open(outfile, 'w') as f:
@@ -286,9 +305,9 @@ def augment_perturbations(data, config):
 
     # load keyword list
     if config['language_code'] == 'de':
-        keyword_list = data_loader.wordlist(WORDLIST_PATH_DE)
+        keyword_list = wordlist(WORDLIST_PATH_DE)
     elif config['language_code'] == 'en':
-        keyword_list = data_loader.wordlist(WORDLIST_PATH_EN)
+        keyword_list = wordlist(WORDLIST_PATH_EN)
     else:
         keyword_list = []
 
@@ -445,16 +464,14 @@ def augment_debiasing(data, config, uid):
     words_neg = []  
 
     for entry in data:
-        # comment out if not using the ```dataload``` package
-        # alternatively, just do: if label == 'class 1', else..
-        if MAPPING_MULTICLASS[entry['label']] > 0:   # positive class
+        if entry['label'] > 0:   # positive class
             for word in re.split(';|,|\'| |\.|-', entry['text']):
-                word = clean_str(word).lower()
+                word = word.strip().lower()
                 if word != '':
                     words_pos.append(word)
-        else:                                        # negative class
+        else:                    # negative class
             for word in re.split(';|,|\'| |\.|-', entry['text']):
-                word = clean_str(word).lower()
+                word = word.strip().lower()
                 if word != '':
                     words_neg.append(word)
 
@@ -470,9 +487,9 @@ def augment_debiasing(data, config, uid):
 
     # load keyword list
     if config['language_code'] == 'de':
-        keyword_list = data_loader.wordlist(WORDLIST_PATH_DE)
+        keyword_list = wordlist(WORDLIST_PATH_DE)
     elif config['language_code'] == 'en':
-        keyword_list = data_loader.wordlist(WORDLIST_PATH_EN)
+        keyword_list = wordlist(WORDLIST_PATH_EN)
     else:
         keyword_list = []
 
@@ -655,9 +672,7 @@ if __name__ == '__main__':
             
         # load data
         print('\n %s' % (config['dataset_name']))
-        # comment out if not using the ```dataload``` package
-        # alternatively, load your data as a list of dicts with keys 'text', 'label', and optionally 'id'
-        data = getattr(data_loader, config['data_loader'])(files=config['input_path'], local=True)  # call data loader function by its name
+        data = simple_tsv_reader(config['input_path'])
         print(len(data), 'items')
 
         # perform augmentation tasks
@@ -688,7 +703,6 @@ if __name__ == '__main__':
                 'date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 'dataset_name': config['dataset_name'],
                 'input_path': config['input_path'],
-                'data_loader': config['data_loader'],
                 'augmentations': aug,
                 'sample_source': config['sample_source'],
                 'output_path': OUTFILE,
