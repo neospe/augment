@@ -37,6 +37,8 @@ This project is from 2020 and there are a few things to be noted.
 ## run
 
 - ```./augment.py```
+  - set paths for data sources
+  - external APIs (optional): text classification, Twitter
 
 - Input: _config.json_
     - multiple jobs can be defined
