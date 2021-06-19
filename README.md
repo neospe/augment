@@ -30,13 +30,13 @@ This project is from 2020 and there are a few things to be noted.
 
 ## install
 
-- Dependencies: ```pip install twint tweepy langid sqlite3 requests tqdm editdistance nltk git+https://git.sr.ht/~spe/pygermanet```
-- WordNet: ```python -m nltk.downloader wordnet```
-- GermaNet: install MongoDB, then ```python -m pygermanet.mongo_import ~/GN_V80/GN_V80_XML/```
+- Dependencies: `pip install twint tweepy langid sqlite3 requests tqdm editdistance nltk git+https://git.sr.ht/~spe/pygermanet`
+- WordNet: `python -m nltk.downloader wordnet`
+- GermaNet: install MongoDB, then `python -m pygermanet.mongo_import ~/GN_V80/GN_V80_XML/`
 
 ## run
 
-- ```./augment.py```
+- `./augment.py`
   - set paths for data sources
   - external APIs (optional): text classification, Twitter
 
@@ -47,10 +47,10 @@ This project is from 2020 and there are a few things to be noted.
 - Configuration file format
   - *dataset_name* (string)
   - *input_path* (list): path(s) to input file(s)
-  - *augmentations* (list): ```perturbations```, ```synonyms```, ```debiasing```
-  - *sample_source* (string): ```twitter```, ```twint```, ```miowordcorpus```
+  - *augmentations* (list): `perturbations`, `synonyms`, `debiasing`
+  - *sample_source* (string): `twitter`, `twint`, `miowordcorpus`
   - *output_path* (string): path to output directory
-  - *language_code* (string): ```de```, ```en```
+  - *language_code* (string): `de`, `en`
 
 - Output
     - Data: txt file(s) in TSV format
@@ -58,7 +58,7 @@ This project is from 2020 and there are a few things to be noted.
 
 ## good to know
 
-- Branch ```dataload``` integrates with a complete MLOps infrastructure: a data loader for various text classification data sets (```dataload```), optionally backed by GridFS (```datalake```), and feeding into an automated training and evaluation pipeline (```autofit```).
+- Branch `dataload` integrates with a complete MLOps infrastructure: a data loader for various text classification data sets (`dataload`), optionally backed by GridFS (`datalake`), and feeding into an automated training and evaluation pipeline (`autofit`).
 
 - Regenerate existing augmentations
   1. manual deletion of: relevant entries in _backlog.json_, corresponding txt files, and entries in _debiasing-samples-backlog.json_
